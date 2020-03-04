@@ -7,8 +7,12 @@ import org.springframework.web.servlet.view.document.AbstractXlsView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 import java.util.Map;
+
+import static sun.awt.X11.XConstants.Success;
 
 public class ExcelView extends AbstractXlsView{
 
@@ -77,6 +81,13 @@ public class ExcelView extends AbstractXlsView{
             userRow.createCell(8).setCellValue(user.getPhoneNumber());
 
             }
+
+        //Escrevendo o arquivo em disco
+        FileOutputStream out = new FileOutputStream(new File("/tmp/products.xls"));
+        workbook.write(out);
+        out.close();
+        workbook.close();
+        System.out.println("Success");
 
     }
 
